@@ -1,0 +1,21 @@
+{
+  "name": "Metro-App",
+  "version": "0.0.0",
+  "description": "Template Metro-App",
+  "authors": [
+    "JensLeuschner"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+	  "jquery": "~2.1.1",
+    "jquery-ui": "~1.11.1",
+    "metro-ui-css": "~2.0.23"
+  }
+}
