@@ -4,14 +4,15 @@ var router = express.Router();
 var UserLogin = require('./includes/UserLogin')
 
 /* GET home page. */
-router.get('/', UserLogin.checkAuth, function(req, res) {
+//router.get('/', UserLogin.checkAuth, function(req, res) {
+router.get('/', function(req, res) {
   //console.log(req)
-  res.render('index', { title: 'Metro' });
+  res.render('index', { title: 'Metro', user : {id: req.session.user_id } });
 });
 
 router.get('/login', function(req, res) {
   //console.log(req)
-  res.render('login', { title: 'Metro Login Page' });
+  res.render('login', { title: 'Metro Login Page'});
 });
 
 router.post('/login', function (req, res) {
@@ -29,7 +30,8 @@ router.post('/login', function (req, res) {
 
 router.get('/logout', function (req, res) {
   delete req.session.user_id;
-  res.redirect('/login');
+  //- res.redirect('/login');
+  res.redirect('/');
 });      
 
 module.exports = router;

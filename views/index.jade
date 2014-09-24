@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  script(type='text/javascript', src='/javascripts/index.js')
+
   //- Navigationbar
   .navigation-bar.fixed-top.dark
     //- .navigation-bar-content.container Responsive zentriert
@@ -40,11 +42,17 @@ block content
             li
               a(href='#') Wurst2
         span.element-divider.place-right
-        a.element.place-right.no-phone(href='/logout' data-hint="Logout|Benutzer abmelden")
-          span.icon-locked-2
+
+        if user.id
+          a.element.place-right.no-phone(href='/logout' data-hint="Logout|Benutzer abmelden")
+            = user.id
+        else
+          a#nav_login.element.place-right.no-phone(href='#' data-hint="Login|Benutzer anmelden") Login
 
   //- Workspace
   h1= title
+  h2 User:
+    = user.id
   p Welcome to #{title}
   i.icon-rocket
   span.icon-rocket
