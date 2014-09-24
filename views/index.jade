@@ -1,5 +1,54 @@
 extends layout
 
 block content
+  //- Navigationbar
+  .navigation-bar.fixed-top.dark
+    //- .navigation-bar-content.container Responsive zentriert
+    .navigation-bar-content
+      //- Brand
+      a.element(href='/') 
+        span.icon-grid-view.fg-cyan.fg-hover-pink
+        |  METRO
+      span.element-divider
+
+      a.element1.pull-menu(href='#')
+      ul.element-menu
+        //- Menu - System
+        li 
+          a.dropdown-toggle(href='#') System
+          ul.dropdown-menu.dark(data-role="dropdown")
+            li
+              a(href='#') Main
+            li
+              a(href='#') Wurst
+            li.divider
+            li
+              a(href='#') Wurst2
+        li
+          a.element.brand(href='#' data-hint="Drucken|Druck mich!")
+            span.icon-printer.fg-lightBlue.fg-hover-white
+
+        .element.place-right(data-role="dropdown")
+          a.dropdown-toggle(href"'#'")
+            span.icon-cog
+          ul.dropdown-menu.place-right.dark(data-role="dropdown")
+            li
+              a(href='#') Main
+            li
+              a(href='#') Wurst
+            li.divider
+            li
+              a(href='#') Wurst2
+        span.element-divider.place-right
+        a.element.place-right.no-phone(href='#')
+          span.icon-locked-2
+
+  //- Workspace
   h1= title
   p Welcome to #{title}
+  i.icon-rocket
+  span.icon-rocket
+
+  - for (var x = 0; x < 30; x++)
+    p Hallo #{x}
+

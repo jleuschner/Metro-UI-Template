@@ -2,9 +2,17 @@ doctype html
 html
   head
     title= title
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    meta(name="product", content="Metro UI on Express Template")
+    meta(name="description", content="Responsive css framework adapted on Express.js on Node.js")
+    meta(name="author", content="Jens Leuschner")
+
     link(rel='stylesheet', href='/bower_components/metro-ui-css/min/metro-bootstrap.min.css')
+    link(rel='stylesheet', href='/bower_components/metro-ui-css/min/metro-responsive.min.css')
     script(type='text/javascript', src='/bower_components/jquery/dist/jquery.min.js')
-    script(type='text/javascript', src='/bower_components/jquery-ui/ui/i18n/minified/i18n/widget.min.js')
+    script(type='text/javascript', src='/bower_components/jquery-ui/ui/minified/widget.min.js')
+    script(type='text/javascript', src='/bower_components/jquery-mousewheel/jquery.mousewheel.min.js')
     script(type='text/javascript', src='/bower_components/metro-ui-css/min/metro.min.js')
 
   body.metro
