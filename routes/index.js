@@ -7,4 +7,9 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Metro' });
 });
 
+router.get('/login', function(req, res) {
+  //console.log(req)
+  res.render('login', { title: 'Metro' });
+});
+
 module.exports = router;
