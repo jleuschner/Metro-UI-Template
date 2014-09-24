@@ -1,8 +1,20 @@
 extends layout
 
 block content
+  script(type='text/javascript').
+    $(document).ready(function () {
+      $.ajaxSetup({ cache: false });
+      $('#logo').height("140px").click( function(){
+        UserLogin()
+      })
+      UserLogin();
+    })
+
+
   .container
-    .bg-steel
-      h1.text-center Metro Login
-      p User:
+    | <br>
+    #logo.ribbed-cyan(data-hint="LOGIN|Click to log in" data-hint-mode="2" data-hint-position="bottom")
+      | <br>
+      h1.text-center.fg-white()= title 
+      |<br>
 
