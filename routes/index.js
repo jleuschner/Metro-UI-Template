@@ -23,15 +23,28 @@ router.get('/login', function(req, res) {
 
 router.post('/login', function (req, res) {
   var post = req.body;
-  console.log(post.login)
-  console.log(post.password)
-  if (post.login === 'jens' && post.password === 'mausi') {
-    req.session.user_id = post.login;
-    res.redirect('/');
+  /*
+  if (post.login === 'jens' && post.password === 'jens') {
+  req.session.user_id = post.login;
+  res.redirect('/');
   } else {
-    //res.send('Bad user/pass');
-    res.redirect('/')
+  //res.send('Bad user/pass');
+  res.redirect('/')
   }
+  */
+  UserLogin.connectDB(post.login,post.password,function (ret) {
+    console.log(ret)
+    if (ret.user) {
+      console.log("OK")
+      req.session.user_id = ret.user;
+      res.redirect('/');
+    } else {
+      //res.send('Bad user/pass');
+      delete req.session.user_id;
+      res.redirect('/')
+    }
+  })
+  return;
 });
 
 router.get('/logout', function (req, res) {
