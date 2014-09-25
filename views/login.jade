@@ -3,6 +3,8 @@ extends layout
 block content
   script(type='text/javascript').
     $(document).ready(function () {
+      $('body').css("background-image", "url(/images/bg_login.jpg)");
+      $('body').css("background-size", "100%");
       $.ajaxSetup({ cache: false });
       $('#logo').height("140px").click( function(){
         UserLogin()
@@ -13,8 +15,10 @@ block content
 
   .container
     | <br>
-    #logo.ribbed-cyan(data-hint="LOGIN|Click to log in" data-hint-mode="2" data-hint-position="bottom")
+    #logo.bg-violet(data-hint="LOGIN|Click to log in" data-hint-mode="2" data-hint-position="bottom")
       | <br>
-      h1.text-center.fg-white()= title 
+      h1.text-center.fg-white()= AppConfig.title 
+        sup= AppConfig.version
+      h2.text-center.fg-white()= AppConfig.description
       |<br>
 

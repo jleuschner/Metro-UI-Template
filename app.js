@@ -25,6 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: '1234567890QWERTY'}));
 
 
+// Config laden
+//var AppConfig= require("./AppConfig")
+
 app.use('/', routes);
 app.use('/users', users);
 

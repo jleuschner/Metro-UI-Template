@@ -10,7 +10,7 @@ block content
       //- Brand
       a.element(href='/') 
         span.icon-grid-view.fg-cyan.fg-hover-pink
-        |  METRO
+        | &nbsp;#{AppConfig.title_short}
       span.element-divider
 
       a.element1.pull-menu(href='#')
@@ -50,10 +50,9 @@ block content
           a#nav_login.element.place-right.no-phone(href='#' data-hint="Login|Benutzer anmelden") Login
 
   //- Workspace
-  h1= title
-  h2 User:
-    = user.id
-  p Welcome to #{title}
+  h1= AppConfig.title
+  h2 User: #{user.id}
+  p Welcome to #{AppConfig.title}
   i.icon-rocket
   span.icon-rocket
 

@@ -18,7 +18,7 @@ function UserLogin() {
         '<div class="input-control password"><input type="password" name="password" tabindex="2" ><button class="btn-reveal"></button></div>' +
         //'<div class="input-control checkbox"><label><input type="checkbox" name="c1" checked/><span class="check"></span>Check me out</label></div>'+
         '<div class="form-actions">' +
-        '<button class="button primary" tabindex="2" >Login</button>&nbsp;'+
+        '<button class="button primary" tabindex="2" type="submit" >Login</button>&nbsp;'+
         '<button class="button" type="button" onclick="$.Dialog.close()" tabindex="2" >Cancel</button> '+
         '</div>'+
         '</form>';

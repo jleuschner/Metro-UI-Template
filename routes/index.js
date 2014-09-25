@@ -2,17 +2,23 @@ var express = require('express');
 var router = express.Router();
 
 var UserLogin = require('./includes/UserLogin')
+var AppConfig= require("../AppConfig")
+
 
 /* GET home page. */
-//router.get('/', UserLogin.checkAuth, function(req, res) {
-router.get('/', function(req, res) {
-  //console.log(req)
-  res.render('index', { title: 'Metro', user : {id: req.session.user_id } });
-});
+if (AppConfig.login.required) {
+  router.get('/', UserLogin.checkAuth, function(req, res) {
+    res.render('index', { AppConfig : AppConfig, user: { id: req.session.user_id} });
+  });
+} else {
+  router.get('/', function (req, res) {
+    res.render('index', { AppConfig : AppConfig, user: { id: req.session.user_id} });
+  });
+
+}
 
 router.get('/login', function(req, res) {
-  //console.log(req)
-  res.render('login', { title: 'Metro Login Page'});
+  res.render('login', { AppConfig: AppConfig });
 });
 
 router.post('/login', function (req, res) {
@@ -30,7 +36,6 @@ router.post('/login', function (req, res) {
 
 router.get('/logout', function (req, res) {
   delete req.session.user_id;
-  //- res.redirect('/login');
   res.redirect('/');
 });      
 
