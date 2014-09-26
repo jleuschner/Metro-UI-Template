@@ -44,10 +44,17 @@ block content
         span.element-divider.place-right
 
         if user.id
-          a.element.place-right.no-phone(href='/logout' data-hint="Logout|Benutzer abmelden")
-            = user.id
+          .element.place-right(data-role="dropdown")
+            a.dropdown-toggle(href='#' data-hint="Benutzer|Benutzeroptionen")
+              span.icon-user
+              | &nbsp;#{user.id}
+            ul.dropdown-menu.place-right.dark(data-role="dropdown")
+              li
+                a(href='/logout' data-hint="Logout|Benutzer abmelden") Logout
         else
-          a#nav_login.element.place-right.no-phone(href='#' data-hint="Login|Benutzer anmelden") Login
+          a#nav_login.element.place-right.no-phone(href='#' data-hint="Login|Benutzer anmelden")
+            span.icon-user
+            | &nbsp;Login
 
   //- Workspace
   h1= AppConfig.title
