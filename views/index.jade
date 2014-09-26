@@ -27,7 +27,7 @@ block content
             li
               a(href='#') Wurst2
         li
-          a.element.brand(href='#' data-hint="Drucken|Druck mich!")
+          a#nav_print.element.brand(href='#' data-hint="Drucken|Druck mich!")
             span.icon-printer.fg-lightBlue.fg-hover-white
 
         .element.place-right(data-role="dropdown")
@@ -55,6 +55,7 @@ block content
           a#nav_login.element.place-right.no-phone(href='#' data-hint="Login|Benutzer anmelden")
             span.icon-user
             | &nbsp;Login
+  div(style="height:40px").no-phone.no-tablet-portrait
 
   //- Workspace
   h1= AppConfig.title

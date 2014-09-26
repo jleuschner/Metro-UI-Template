@@ -2,11 +2,12 @@ extends layout
 
 block content
   script(type='text/javascript').
+    $('body').css("background-image", "url(/images/bg_login.jpg)");
+    $('body').css("background-size", "100%");
+    $('#logo').height("140px")
     $(document).ready(function () {
-      $('body').css("background-image", "url(/images/bg_login.jpg)");
-      $('body').css("background-size", "100%");
       $.ajaxSetup({ cache: false });
-      $('#logo').height("140px").click( function(){
+      $('#logo').click( function(){
         UserLogin()
       })
       UserLogin();
