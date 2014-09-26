@@ -44,8 +44,8 @@ block content
         span.element-divider.place-right
 
         if user.id
-          .element.place-right(data-role="dropdown")
-            a.dropdown-toggle(href='#' data-hint="Benutzer|Benutzeroptionen")
+          .element.place-right(data-role="dropdown" data-hint="Benutzer|Benutzeroptionen")
+            a.dropdown-toggle(href='#' )
               span.icon-user
               | &nbsp;#{user.id}
             ul.dropdown-menu.place-right.dark(data-role="dropdown")

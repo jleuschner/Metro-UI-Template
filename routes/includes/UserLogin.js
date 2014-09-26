@@ -3,10 +3,18 @@ var mysql = require('mysql');
 var AppConfig= require("../../AppConfig")
 
 module.exports = {
+  initUser: function(req) {
+    if (req.session.user === undefined) {
+      req.session.user = { DBCode: "OK"}
+      }
+  },
   checkAuth: function (req, res, next) {
-    if (!req.session.user_id) {
+    if (req.session.user === undefined) {
+      req.session.user = { DBCode: "OK" }
+      }
+    if (!req.session.user.id) {
       //res.send('You are not authorized to view this page');
-      res.redirect("/login")
+      res.redirect("/login" )
     } else {
       next();
     }
@@ -19,10 +27,11 @@ module.exports = {
     })
     DB.connect(function (err) {
       if (err) {
-        cb({user: "", threatId : ""})
+        console.log(err)
+        cb({user: "", threatId : "", DBCode : err.code})
         return;
       }
-      cb({user: user, threatId : DB.threadId })
+      cb({user: user, threatId : DB.threadId, DBCode : "OK" })
     })
 
   }

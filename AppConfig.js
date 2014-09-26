@@ -4,7 +4,7 @@ module.exports = {
   description: "Ein Template für Metro-UI",
   version: "1.0",
   login : {
-    required : false,
-    MySQLServer : "192.168.0.10"
+    required : true,
+    MySQLServer : "thorin.kl.kdo.int"
   }
 };

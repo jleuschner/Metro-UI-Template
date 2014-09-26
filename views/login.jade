@@ -22,3 +22,14 @@ block content
       h2.text-center.fg-white()= AppConfig.description
       |<br>
 
+    if user.DBCode != "OK"
+      .bg-red
+        if user.DBCode == "ER_ACCESS_DENIED_ERROR"
+          h2.text-center.fg-white User / Password nicht korrekt!
+        if user.DBCode == "ECONNREFUSED"
+          h2.text-center.fg-white Verbindung zu MySQL auf #{AppConfig.login.MySQLServer} kann nicht hergestellt werden!
+        if user.DBCode == "ENOTFOUND"
+          h2.text-center.fg-white MySQL-Server #{AppConfig.login.MySQLServer} kann nicht gefunden werden!
+        h6.text-center.fg-white (#{user.DBCode})
+           
+          
