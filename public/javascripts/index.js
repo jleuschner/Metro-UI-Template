@@ -5,10 +5,20 @@ $(document).ready(function () {
   $('#nav_login').click( function(){
     UserLogin()
   })
+
   $('#nav_print').click( function(){
     $.getJSON( "/ajax/", {'cmd' : 'vlans' }, function( data ) {
       if (data.err) {
-        alert(data.err)
+        //alert(data.err)
+        
+        $.Notify({
+            style: {background: 'red', color: 'white'},
+            shadow: true,
+    	      caption: "ERROR",
+            content: "<br><br>Bitte einloggen!",
+            timeout: 10000 // 10 seconds
+        });
+        
         return
       }
       var items = [];
