@@ -31,7 +31,7 @@ block content
             span.icon-printer.fg-lightBlue.fg-hover-white
 
         .element.place-right(data-role="dropdown")
-          a.dropdown-toggle(href"'#'")
+          a.dropdown-toggle(href='#')
             span.icon-cog
           ul.dropdown-menu.place-right.dark(data-role="dropdown")
             li
@@ -43,11 +43,11 @@ block content
               a(href='#') Wurst2
         span.element-divider.place-right
 
-        if user.id
+        if user.user
           .element.place-right(data-role="dropdown" data-hint="Benutzer|Benutzeroptionen")
             a.dropdown-toggle(href='#' )
               span.icon-user
-              | &nbsp;#{user.id}
+              | &nbsp;#{user.user}
             ul.dropdown-menu.place-right.dark(data-role="dropdown")
               li
                 a(href='/logout' data-hint="Logout|Benutzer abmelden") Logout
@@ -59,11 +59,12 @@ block content
 
   //- Workspace
   h1= AppConfig.title
-  h2 User: #{user.id}
+  h2 User: #{user.user}
   p Welcome to #{AppConfig.title}
   i.icon-rocket
   span.icon-rocket
 
-  - for (var x = 0; x < 30; x++)
-    p Hallo #{x}
+  //
+    - for (var x = 0; x < 30; x++)
+      p Hallo #{x}
 

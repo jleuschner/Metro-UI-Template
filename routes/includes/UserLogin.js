@@ -12,7 +12,7 @@ module.exports = {
     if (req.session.user === undefined) {
       req.session.user = { DBCode: "OK" }
       }
-    if (!req.session.user.id) {
+    if (!req.session.user.user) {
       //res.send('You are not authorized to view this page');
       res.redirect("/login" )
     } else {
@@ -22,6 +22,7 @@ module.exports = {
   connectDB: function (user,pass,cb) {
     var DB = mysql.createConnection({
       host: AppConfig.login.MySQLServer,
+      database: AppConfig.login.MySQLDatabase,
       user: user,
       password: pass
     })
@@ -31,9 +32,23 @@ module.exports = {
         cb({user: "", threatId : "", DBCode : err.code})
         return;
       }
-      cb({user: user, threatId : DB.threadId, DBCode : "OK" })
+      cb({user: user, threatId : DB.threadId, DBCode : "OK", DBconnection : DB })
     })
-
+  },
+  queryDB: function(session,qry,cb) {
+    this.connectDB(session.user,session.pass, function(userDB){
+      if (userDB.DBCode!="OK") {
+        //console.log("ERR: "+userDB.DBCode)
+        if (cb) cb(userDB.DBCode)
+        return
+      }
+      userDB.DBconnection.query(qry, function (err, rows, fields) {
+          if ( err) {
+            console.log(err)
+          }
+          if (cb) cb (err,rows,fields)
+        })
+    })
   }
 
 };

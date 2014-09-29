@@ -9,6 +9,7 @@ var mysql = require('mysql');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var ajax = require('./routes/ajax');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(session({secret: '1234567890QWERTY'}));
 //var AppConfig= require("./AppConfig")
 
 app.use('/', routes);
+app.use('/ajax', ajax);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

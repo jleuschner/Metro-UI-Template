@@ -10,11 +10,10 @@ if (AppConfig.login.required) {
     res.render('index', { AppConfig : AppConfig, user: req.session.user });
   });
 } else {
-router.get('/', function (req, res) {
-  UserLogin.initUser(req);
-  res.render('index', { AppConfig: AppConfig, user: req.session.user });
-});
-
+  router.get('/', function (req, res) {
+    UserLogin.initUser(req);
+    res.render('index', { AppConfig: AppConfig, user: req.session.user });
+  });
 }
 
 router.get('/login', function(req, res) {
@@ -27,7 +26,7 @@ router.post('/login', function (req, res) {
   var post = req.body;
   /*
   if (post.login === 'jens' && post.password === 'jens') {
-  req.session.user_id = post.login;
+  req.session.user.user = post.login;
   res.redirect('/');
   } else {
   //res.send('Bad user/pass');
@@ -39,11 +38,13 @@ router.post('/login', function (req, res) {
     req.session.user.DBCode = ret.DBCode
     if (ret.user) {
       //console.log("OK")
-      req.session.user.id = ret.user;
+      req.session.user.user = ret.user;
+      req.session.user.pass = post.password;
       res.redirect('/');
     } else {
       //res.send('Bad user/pass');
-      delete req.session.user.id;
+      delete req.session.user.user;
+      delete req.session.user.pass;
       res.redirect('/')
     }
   })
@@ -52,7 +53,8 @@ router.post('/login', function (req, res) {
 
 router.get('/logout', function (req, res) {
   UserLogin.initUser(req);
-  delete req.session.user.id;
+  delete req.session.user.user;
+  delete req.session.user.pass;
   res.redirect('/');
 });      
 
