@@ -1,0 +1,26 @@
+h2 Benutzer-Verwaltung
+a#btnTest.button Button
+.row
+  .span6
+    #userliste.listview-outlook.bg-white(data-role="listview", style="height:400px;overflow:auto;")
+
+script.
+  $('#btnTest').click( function(){
+    alert("Click")
+  })
+
+  $.getJSON( "/ajax/", {'cmd' : 'sys_userliste' }, function( data ) {
+    var items = [];
+    $.each( data.rows, function( key, val ) {
+      items.push( "<a href='#' class='list'><div class='list-content' >"
+        + "<div class='list-icon icon-user fg-green' />"
+        + "<div class='data' >"
+        + "<span class='list-title'>" + val.login + "</span>"
+        + "<span class='list-subtitle'>" + val.mail + "</span>"
+        + "</div>"
+        + "</div></a>" );
+    })
+    $('#userliste').html(items.join(""))
+    
+  })
+

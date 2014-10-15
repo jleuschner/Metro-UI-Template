@@ -12,6 +12,15 @@ router.get('/', function (req, res) {
       });
   }
 
+  if (req.query.cmd == "sys_userliste") {
+    UserLogin.queryDB(req.session.user, "select id, login, ADAccount,mail from satan_user",
+      function (err, rows, fields) {
+        res.send({ err: err, rows: rows, fields: fields })
+      });
+  }
+
+
+
   //res.setHeader({ 'Content-Type': 'application/json' });
   //res.send({ 'cmd': req.query.cmd, 1: "eins", 2: "zwei" });
 

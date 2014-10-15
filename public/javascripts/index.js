@@ -1,10 +1,32 @@
 
+function checkSize() {
+  if ($(this).width() >= 800) {
+    $('#workspace').addClass('padd')  
+  } else {
+    $('#workspace').removeClass('padd')  
+  }
+}
+
 $(document).ready(function () {
   $.ajaxSetup({ cache: false });
+  $(window).resize( function() {
+    checkSize()
+  })
+  $('#navbar').bind("contextmenu",function(e){
+        return false;
+    });
 
   $('#nav_login').click( function(){
     UserLogin()
   })
+
+  $('#nav_UserVerwaltung').click( function(){
+    $.get( "/system/", {'cmd' : 'vlans' }, function( data ) {
+      $('#workspace').html(data)
+    })
+    if ($('#menutoggle').is(":visible") ) $('#menucollapse').toggle()
+  })
+
 
   $('#nav_print').click( function(){
     $.getJSON( "/ajax/", {'cmd' : 'vlans' }, function( data ) {
@@ -43,9 +65,9 @@ $(document).ready(function () {
     .always(function() {
       console.log( "complete" );
     });
-  if ($('#menutoggle').is(":visible") ) $('#topmenu').toggle()
+  if ($('#menutoggle').is(":visible") ) $('#menucollapse').toggle()
 
   })
 
-
+  checkSize()
 });

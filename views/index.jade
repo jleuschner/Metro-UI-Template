@@ -4,7 +4,7 @@ block content
   script(type='text/javascript', src='/javascripts/index.js')
 
   //- Navigationbar
-  .navigation-bar.fixed-top.dark
+  #navbar.navigation-bar.fixed-top.dark
     //- .navigation-bar-content.container Responsive zentriert
     .navigation-bar-content
       //- Brand
@@ -14,7 +14,7 @@ block content
       span.element-divider
 
       a#menutoggle.element1.pull-menu(href='#')
-      ul#topmenu.element-menu
+      ul#menucollapse.element-menu
         //- Menu - System
         li 
           a.dropdown-toggle(href='#') System
@@ -35,12 +35,10 @@ block content
             span.icon-cog
           ul.dropdown-menu.place-right.dark(data-role="dropdown")
             li
-              a(href='#') Main
-            li
-              a(href='#') Wurst
+              a#nav_UserVerwaltung(href='#') Benutzerverwaltung
             li.divider
             li
-              a(href='#') Wurst2
+              a(href='#') Wurst
         span.element-divider.place-right
 
         if user.user
@@ -58,11 +56,12 @@ block content
   div(style="height:40px").no-phone.no-tablet-portrait
 
   //- Workspace
-  h1= AppConfig.title
-  h2 User: #{user.user}
-  p Welcome to #{AppConfig.title}
-  div#vlans
-  //
-    - for (var x = 0; x < 30; x++)
-      p Hallo #{x}
+    h1= AppConfig.title
+    h2 User: #{user.user}
+    p Welcome to #{AppConfig.title}
+  
+  #workspace.grid
+    .row
+      .span6
+        div#vlans
 

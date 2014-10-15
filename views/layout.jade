@@ -21,7 +21,9 @@ html
       | .notify-container { margin-top : 44px }
       | table.table-fixed-header tbody, table.table-fixed-header thead {display: block }
       | table.table-fixed-header tbody { height: 300px; overflow: auto }
+      | .table-hover tbody tr:hover td { background: lightBlue; }
+      | .padd { margin-left:10px; }
       
 
-  body.metro
+  body.metro(style="background-color: #f0eeee; ")
     block content
