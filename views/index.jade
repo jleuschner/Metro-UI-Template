@@ -13,8 +13,8 @@ block content
         | &nbsp;#{AppConfig.title_short}
       span.element-divider
 
-      a.element1.pull-menu(href='#')
-      ul.element-menu
+      a#menutoggle.element1.pull-menu(href='#')
+      ul#topmenu.element-menu
         //- Menu - System
         li 
           a.dropdown-toggle(href='#') System
@@ -61,9 +61,7 @@ block content
   h1= AppConfig.title
   h2 User: #{user.user}
   p Welcome to #{AppConfig.title}
-  i.icon-rocket
-  span.icon-rocket
-
+  div#vlans
   //
     - for (var x = 0; x < 30; x++)
       p Hallo #{x}
