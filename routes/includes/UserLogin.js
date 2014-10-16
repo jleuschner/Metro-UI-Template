@@ -36,9 +36,14 @@ module.exports = {
     })
   },
   queryDB: function(session,qry,cb) {
+    if (!session) {
+      console.log("NOSESS")
+      if (cb) cb("NOSESSION")
+      return
+    }
     this.connectDB(session.user,session.pass, function(userDB){
       if (userDB.DBCode!="OK") {
-        //console.log("ERR: "+userDB.DBCode)
+        console.log("ERR: "+userDB.DBCode)
         if (cb) cb(userDB.DBCode)
         return
       }

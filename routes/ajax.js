@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
   }
 
   if (req.query.cmd == "sys_userliste") {
-    UserLogin.queryDB(req.session.user, "select id, login, ADAccount,mail from satan_user",
+    UserLogin.queryDB(req.session.user, "select id, login, ADAccount,mail,enabled from satan_user order by login",
       function (err, rows, fields) {
         res.send({ err: err, rows: rows, fields: fields })
       });

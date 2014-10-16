@@ -1,19 +1,43 @@
 h2 Benutzer-Verwaltung
+p sdhsjdh
 a#btnTest.button Button
 .row
   .span6
     #userliste.listview-outlook.bg-white(data-role="listview", style="height:400px;overflow:auto;")
+  .span6
+    #userdata.bg-white
+      form
+        fieldset
+          label Login
+          .input-control.text(data-role="input-control")
+            input(type="text")
+            button.btn-clear(tabindex="-1")
+          .input-group
+            input.form-control(type=text)
+
 
 script.
   $('#btnTest').click( function(){
     alert("Click")
   })
 
+  $(window).resize( function(){
+    $('#userliste').height( $(window).height() - $('#userliste').position().top -30 )
+  })
+
+  $('.input-control').inputControl();
+  
   $.getJSON( "/ajax/", {'cmd' : 'sys_userliste' }, function( data ) {
+    if (data.err) {
+      alert(data.err)
+      $(location).attr("href","/login")
+      return
+    }
     var items = [];
     $.each( data.rows, function( key, val ) {
       items.push( "<a href='#' class='list'><div class='list-content' >"
-        + "<div class='list-icon icon-user fg-green' />"
+        + "<div class='list-icon icon-user " 
+        + (val.enabled ? "fg-green' />" : "fg-red' />")
         + "<div class='data' >"
         + "<span class='list-title'>" + val.login + "</span>"
         + "<span class='list-subtitle'>" + val.mail + "</span>"
@@ -22,5 +46,17 @@ script.
     })
     $('#userliste').html(items.join(""))
     
+    $('#userliste').listview({
+      onListClick: function(_list){
+        //$('#userdata').html( _list.html() )
+        }
+      })
+    //$('.icon-user').click( function() { alert("User") } )
+    //$('.list-subtitle').click( function() { alert("Subtitle") } )
   })
+
+ 
+
+  $(window).resize()
+
 
