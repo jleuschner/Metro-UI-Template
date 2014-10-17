@@ -27,6 +27,13 @@ $(document).ready(function () {
     if ($('#menutoggle').is(":visible") ) $('#menucollapse').toggle()
   })
 
+  $('#nav_NetIO').click( function(){
+    $.get( "/netio/", {'cmd' : 'vlans' }, function( data ) {
+      $('#workspace').html(data)
+    })
+    if ($('#menutoggle').is(":visible") ) $('#menucollapse').toggle()
+  })
+
 
   $('#nav_print').click( function(){
     $.getJSON( "/ajax/", {'cmd' : 'vlans' }, function( data ) {

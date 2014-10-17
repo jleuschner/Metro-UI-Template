@@ -15,15 +15,17 @@ function UserLogin() {
         '<label>Login</label>' +
         '<div class="input-control text"><input type="text" name="login" tabindex="1" ><button class="btn-clear"></button></div>' +
         '<label>Password</label>'+
-        '<div class="input-control password"><input type="password" name="password" tabindex="2" ><button class="btn-reveal"></button></div>' +
+        '<div class="input-control password"><input type="password" name="password" tabindex="2" >' +
+        // '<button class="btn-reveal"></button></div>' +
         //'<div class="input-control checkbox"><label><input type="checkbox" name="c1" checked/><span class="check"></span>Check me out</label></div>'+
         '<div class="form-actions">' +
-        '<button class="button primary" tabindex="2" type="submit" >Login</button>&nbsp;'+
-        '<button class="button" type="button" onclick="$.Dialog.close()" tabindex="2" >Cancel</button> '+
+        '<button class="button primary" tabindex="3" type="submit" >Login</button>&nbsp;'+
+        '<button class="button" type="button" onclick="$.Dialog.close()" tabindex="4" >Cancel</button> '+
         '</div>'+
         '</form>';
         $.Dialog.title("User login");
         $.Dialog.content(content);
+        $('.input-control').inputControl()
         $('#UserLogin input:first').focus()
       }
   });
