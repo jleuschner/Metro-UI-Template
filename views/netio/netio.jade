@@ -1,5 +1,5 @@
-h2 Benutzer-Verwaltung
-p sdhsjdh
+h2 NetIO
+p Kleine netios
 a#btnTest.button Button
 .row
   .span6
@@ -23,6 +23,46 @@ a#btnTest.button Button
     .input-control.text.size2(data-role="datepicker",data-effect="fade")
       input#datep(type="text" disabled)
       button.btn-date
+
+script.
+  $(window).resize( function(){
+    //$('#userliste').height( $(window).height() - $('#userliste').position().top -30 )
+  })
+
+
+  $.Metro.initAll()
+  $.getJSON( "/netio/DeviceList",  function( data ) {
+    if (data.err) {
+      alert(data.err)
+      $(location).attr("href","/login")
+      return
+    }
+    var items = [];
+    $.each( data.rows, function( key, val ) {
+      items.push( "<a href='#' class='list'><div class='list-content' >"
+        + "<div class='list-icon icon-user " 
+        + (val.enabled ? "fg-green' />" : "fg-red' />")
+        + "<div class='data' >"
+        + "<span class='list-title'>" + val.hostname + "</span>"
+        + "<span class='list-subtitle'>" + val.ip + "</span>"
+        + "</div>"
+        + "</div></a>" );
+    })
+    $('#userliste').html(items.join(""))
+    
+    $('#userliste').listview({
+      onListClick: function(_list){
+        //$('#userdata').html( _list.html() )
+        }
+      })
+    //$('.icon-user').click( function() { alert("User") } )
+    //$('.list-subtitle').click( function() { alert("Subtitle") } )
+  })
+
+ 
+
+  $(window).resize()
+
 
 
 
