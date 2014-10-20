@@ -1,0 +1,17 @@
+h1 Systemverwaltung
+
+.grid
+  .row
+    .span3
+      #User.tile.double.bg-darkPink
+        .tile-content.icon
+          i.icon-user
+        .tile-status
+          span.name Benutzerverwaltung
+
+script.
+  $('#User').click( function(){
+    $.get( "/system/user", function( data ) {
+      $('#workspace').html(data)
+    })
+  })

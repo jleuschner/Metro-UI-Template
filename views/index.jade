@@ -34,7 +34,7 @@ block content
             span.icon-globe.fg-lightBlue.fg-hover-white
 
         .element.place-right(data-role="dropdown")
-          a.dropdown-toggle(href='#')
+          a#nav_SysTools.dropdown-toggle(href='#')
             span.icon-cog
           ul.dropdown-menu.place-right.dark(data-role="dropdown")
             li
@@ -63,8 +63,9 @@ block content
     h2 User: #{user.user}
     p Welcome to #{AppConfig.title}
   
-  #workspace.grid
-    .row
-      .span6
-        div#vlans
+  .container
+    #workspace.grid
+      .row
+        .span6
+          div#vlans
 

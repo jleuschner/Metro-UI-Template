@@ -1,17 +1,17 @@
 h2 Benutzer-Verwaltung
-p sdhsjdh
-a#btnTest.button Button
+button.no-desktop Test
 .row
   .span6
     #userliste.listview-outlook.bg-white(data-role="listview", style="height:400px;overflow:auto;")
-  .span6.bg-white
-    .row
+  #userdata.span6.bg-white(style='display:none')
+    .row(style='margin-top:0px')
       .span3
         label Login
-        input(type="text",data-transform="input-control")
+        input(id="user_login",type="text",data-transform="input-control")
+      .clearAll.no-desktop
       .span3
         label AD-Account
-        input(type="text",data-transform="input-control")
+        input(id="user_ADAccount",type="text",data-transform="input-control")
     label Mail
     input(type="email", data-transform="input-control")
     label Telefon
@@ -23,22 +23,22 @@ a#btnTest.button Button
     .input-control.text.size2(data-role="datepicker",data-effect="fade")
       input#datep(type="text" disabled)
       button.btn-date
+    .clearAll
+    div(style="text-align:center")
+      button.primary 
+        i.icon-floppy.on-left
+        | Speichern
+      button#btn_cancel.danger.on-right
+        i.icon-cancel.on-left
+        | Abbrechen
 
 
 script.
-  $('#btnTest').click( function(){
-    alert("Click")
-  })
-
   $(window).resize( function(){
     $('#userliste').height( $(window).height() - $('#userliste').position().top -30 )
   })
-
-  //$('#datep').datepicker();
-
-  $.Metro.initAll()
   
-  $.getJSON( "/ajax/", {'cmd' : 'sys_userliste' }, function( data ) {
+  $.getJSON( "/system/user/getList", {'cmd' : '' }, function( data ) {
     if (data.err) {
       alert(data.err)
       $(location).attr("href","/login")
@@ -46,7 +46,8 @@ script.
     }
     var items = [];
     $.each( data.rows, function( key, val ) {
-      items.push( "<a href='#' class='list'><div class='list-content' >"
+      console.log(val)
+      items.push( "<a href='#' class='list' data-json='" + JSON.stringify(val) + "'><div class='list-content' >"
         + "<div class='list-icon icon-user " 
         + (val.enabled ? "fg-green' />" : "fg-red' />")
         + "<div class='data' >"
@@ -57,15 +58,20 @@ script.
     })
     $('#userliste').html(items.join(""))
     
-    $('#userliste').listview({
-      onListClick: function(_list){
-        //$('#userdata').html( _list.html() )
-        }
+    $('.list',"#userliste").click( function() { 
+      $('#user_login').attr("value", $(this).data("json").login ) 
+      $('#user_ADAccount').attr("value", $(this).data("json").ADAccount) 
+      $('#userdata').show("slide")
       })
     //$('.icon-user').click( function() { alert("User") } )
     //$('.list-subtitle').click( function() { alert("Subtitle") } )
   })
 
+  $('#btn_cancel').click( function(){
+    $('#userdata').hide('slide')
+  })
+  
+  $.Metro.initAll()
  
 
   $(window).resize()

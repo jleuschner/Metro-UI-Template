@@ -1,9 +1,9 @@
 
 function checkSize() {
   if ($(this).width() >= 800) {
-    $('#workspace').addClass('padd')  
+    //$('#workspace').addClass('padd')  
   } else {
-    $('#workspace').removeClass('padd')  
+    //$('#workspace').removeClass('padd')  
   }
 }
 
@@ -20,8 +20,16 @@ $(document).ready(function () {
     UserLogin()
   })
 
+
+  $('#nav_SysTools').dblclick( function(){
+    $.get( "/system", function( data ) {
+      $('#workspace').html(data)
+    })
+    if ($('#menutoggle').is(":visible") ) $('#menucollapse').toggle()
+  })
+
   $('#nav_UserVerwaltung').click( function(){
-    $.get( "/system/", {'cmd' : 'vlans' }, function( data ) {
+    $.get( "/system/user", function( data ) {
       $('#workspace').html(data)
     })
     if ($('#menutoggle').is(":visible") ) $('#menucollapse').toggle()
