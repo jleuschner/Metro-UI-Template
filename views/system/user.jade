@@ -13,19 +13,21 @@ button.no-desktop Test
         label AD-Account
         input(id="user_ADAccount",type="text",data-transform="input-control")
     label Mail
-    input(type="email", data-transform="input-control")
-    label Telefon
-    input(type="checkbox", data-transform="input-control", data-transform-type="switch")
-    label Number
-    .input-control.text
-      input(type="number")
-    label Datum
-    .input-control.text.size2(data-role="datepicker",data-effect="fade")
-      input#datep(type="text" disabled)
-      button.btn-date
-    .clearAll
+    input(id='user_mail',type="email", data-transform="input-control")
+
+    fieldset
+      label Status
+      input(id='user_status',type="checkbox", data-transform="input-control", data-transform-type="switch")
+      #user_statusTxt.inline-block aktiv
+
+    //-
+      label Datum
+      .input-control.text.size2(data-role="datepicker",data-effect="fade")
+        input#datep(type="text" disabled)
+        button.btn-date
+    hr
     div(style="text-align:center")
-      button.primary 
+      button#btn_OK.primary 
         i.icon-floppy.on-left
         | Speichern
       button#btn_cancel.danger.on-right
@@ -46,7 +48,7 @@ script.
     }
     var items = [];
     $.each( data.rows, function( key, val ) {
-      console.log(val)
+      console.log(JSON.stringify(val))
       items.push( "<a href='#' class='list' data-json='" + JSON.stringify(val) + "'><div class='list-content' >"
         + "<div class='list-icon icon-user " 
         + (val.enabled ? "fg-green' />" : "fg-red' />")
@@ -61,16 +63,28 @@ script.
     $('.list',"#userliste").click( function() { 
       $('#user_login').attr("value", $(this).data("json").login ) 
       $('#user_ADAccount').attr("value", $(this).data("json").ADAccount) 
+      $('#user_mail').attr("value", $(this).data("json").mail ) 
+      $('#user_status').prop("checked", $(this).data("json").enabled) 
+      $('#user_status').change() 
       $('#userdata').show("slide")
       })
     //$('.icon-user').click( function() { alert("User") } )
     //$('.list-subtitle').click( function() { alert("Subtitle") } )
   })
 
+  $('#user_status').change( function(){
+    $('#user_statusTxt').text( ( $(this).prop("checked") ? "aktiv" : "deaktiviert") )
+  })
+
   $('#btn_cancel').click( function(){
     $('#userdata').hide('slide')
   })
+
+  $('#btn_OK').click( function(){
+    alert( $('#user_status').prop('checked') )
+  })
   
+  //$("label").css("margin","0px")
   $.Metro.initAll()
  
 
