@@ -64,7 +64,17 @@ function netio_send(cmd) {
 	  console.log('Received: ' + data);
 	  client.destroy(); // kill client after server's response
   });
- 
+
+  client.on('error', function (e) {
+    console.log("Error: " + e.code)
+    client.destroy();
+  })
+  client.setTimeout(1000);
+  client.on('timeout', function () {
+    console.log("TimeOut")
+    client.destroy();
+  })
+
   client.on('close', function() {
 	  console.log('Connection closed');
   });
