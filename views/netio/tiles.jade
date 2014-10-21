@@ -1,0 +1,19 @@
+h1 Licht
+
+.tile.double.bg-darkPink(data-mood=1)
+  .tile-content.icon
+    i.icon-user
+  .tile-status
+    span.name AN
+.tile.double.bg-darkBlue(data-mood=0)
+  .tile-content.icon
+    i.icon-user
+  .tile-status
+    span.name AUS
+
+script.
+  $('.tile').click( function(){
+    $.get( "/netio/send", { mood : $(this).data("mood")}, function( data ) {
+      //$('#workspace').html(data)
+    })
+  })

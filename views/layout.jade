@@ -9,8 +9,19 @@ html
     meta(name="description", content="Responsive css framework adapted on Express.js on Node.js")
     meta(name="author", content="Jens Leuschner")
 
+    link(rel="icon",href="icon.png",type="image/x-icon")
+    link(rel="shortcut icon",href="icon.png",type="image/x-icon")
+    link(rel="apple-touch-icon",href="icon.png")
+    link(rel="apple-touch-startup-image",href="icon.png")
+    meta(name="mobile-web-app-capable",content="yes")
+    meta(name="apple-mobile-web-app-capable",content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style",content="black")
+
+
+
     link(rel='stylesheet', href='/bower_components/metro-ui-css/min/metro-bootstrap.min.css')
-    link(rel='stylesheet', href='/bower_components/metro-ui-css/min/metro-responsive.min.css')
+    //link(rel='stylesheet', href='/bower_components/metro-ui-css/min/metro-responsive.min.css')
+    link(rel='stylesheet', href='/bower_components/metro-ui-css/css/metro-bootstrap-responsive.css')
     script(type='text/javascript', src='/bower_components/jquery/dist/jquery.min.js')
     script(type='text/javascript', src='/bower_components/jquery-ui/ui/minified/widget.min.js')
     script(type='text/javascript', src='/bower_components/jquery-mousewheel/jquery.mousewheel.min.js')
