@@ -21,6 +21,14 @@ $(document).ready(function () {
   })
 
 
+  $('#nav_DokuSys').click( function(){
+    $.get( "/DokuSys", function( data ) {
+      $('#workspace').html(data)
+    })
+    if ($('#menutoggle').is(":visible") ) $('#menucollapse').toggle()
+  })
+
+
   $('#nav_SysTools').dblclick( function(){
     $.get( "/system", function( data ) {
       $('#workspace').html(data)
