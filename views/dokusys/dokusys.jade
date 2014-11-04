@@ -2,34 +2,32 @@ h2 Dokumentationen
 p Die allwissende Müllhalde
 .row
   .span6
-    #inhalt
+    .input-control.text(data-role="input-control")
+      input#doc_search(type="text",placeholder="Suchbegriff")
+      button.btn-clear.fg-steel(tabindex="-1")
+    div(style='width:100%')
+      .toolbar.place-right(style='margin-bottom:0px')
+        button#doc_btnTest.mini Open Node
+        button#doc_btnOpenAll.mini Alle öffnen
+        button#doc_btnCloseAll.mini Alle schließen
+    div(style='clear:all')
+    #doc_inhalt(style="width:100%;height:400px;overflow:auto")
       ul.treeview(data-role="treeview")
-        li.node
-          a(href='#') Erster Knoten
-          
-          li.node.collapsed
-            a(href='#') 
-              span.node-toggle
-              | Zweiter
-            ul
-              li 
-                a(href='#') 2.1
-              li.node.collapsed
-                a(href='#') 
-                  span.node-toggle
-                  | Subzweiter Knoten
-                ul
-                  li 
-                    a(href='#') 2.1
-              li(style='display:none') 
-                a(href='#') 2.4
-            li 
-              a(href='#') 3.4
-          
-          
-
-        
   .span6.bg-white
+    nav.breadcrumbs.mini
+      ul
+        li
+          a(href="#")
+            i.icon-home
+        li
+          a(href="#") Home
+        li
+          a(href="#") Library
+        li.active
+          a(href="#") Data
+    h2#doc_topic Topic
+    p#doc_id ID:
+    #doctext(style="width:100%") Hallo!
     .row
       .span3
         label Login
@@ -49,73 +47,8 @@ p Die allwissende Müllhalde
       input#datep(type="text" disabled)
       button.btn-date
 
-script.
+script(src='/javascripts/dokusys/dokusys.js')
 
-  $(window).resize( function(){
-    //$('#userliste').height( $(window).height() - $('#userliste').position().top -30 )
-  })
-  
-  var tree = $("<ul class=treeview data-role=treeview><li class='node' id=topic0><a href='#'><span class=node-toggle></span>Root</a></li></ul>") 
-  /*
-  $("#topic0 a",tree).after( $("<li class=node id=topic1><a href='#'>Erster</a></li>"))
-  $("#topic1",tree).wrap("<ul>")
-  $("#topic1 a:last",tree).after( $("<li class=node id=topic2><a href='#'>Zweiter</a></li>"))
-  $("#topic0",tree).after( $("<li class=node id=topic3><a href='#'>Roo2</a></li>"))
-  */
-  $.each([{id:1,parent:0},{id:2,parent:0},{id:3,parent:0},{id:4,parent:0},{id:5,parent:0}], function(key,obj) {
-    if ( $('#topic'+obj.parent).parent().hasClass('node') ) { alert("WR")}
-    $('#topic'+obj.parent+" a:last",tree).after( $("<li class=node id=topic"+obj.id+"><a href='#'>Topic"+ obj.id +"</a></li>") )
-  })
-  
-  $("#inhalt ul").replaceWith(tree)
-  console.log( $('#inhalt').html() )
-
-  $.Metro.initAll()
-  $("#inhalt a").on('dblclick',function(e) {
-    var $this = $(this), node = $this.parent("li");
-    node.toggleClass('collapsed')
-    if (node.hasClass('collapsed')) {
-        node.children('ul').fadeOut('fast');
-        //that.options.onNodeCollapsed(node);
-    } else {
-        node.children('ul').fadeIn('fast');
-        //that.options.onNodeExpanded(node);
-    }
-  })
-
-
-
-  $.getJSON( "/DokuSys/getList",  function( data ) {
-    if (data.err) {
-      alert(data.err)
-      $(location).attr("href","/login")
-      return
-    }
-    var items = [];
-    $.each( data.rows, function( key, val ) {
-      items.push( "<a href='#' class='list'><div class='list-content' >"
-        + "<div class='list-icon icon-user " 
-        + (val.enabled ? "fg-green' />" : "fg-red' />")
-        + "<div class='data' >"
-        + "<span class='list-title'>" + val.hostname + "</span>"
-        + "<span class='list-subtitle'>" + val.ip + "</span>"
-        + "</div>"
-        + "</div></a>" );
-    })
-    $('#userliste').html(items.join(""))
-    
-    $('#userliste').listview({
-      onListClick: function(_list){
-        //$('#userdata').html( _list.html() )
-        }
-      })
-    //$('.icon-user').click( function() { alert("User") } )
-    //$('.list-subtitle').click( function() { alert("Subtitle") } )
-  })
-  
- 
-
-  $(window).resize()
 
 
 

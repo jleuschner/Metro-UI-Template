@@ -9,8 +9,10 @@ router.get('/', function (req, res) {
 
 // Ajax
 router.get('/getList', function (req, res) {
-  UserLogin.queryDB(req.session.user, "select id, parent, topic,keywords from doc_topics order by id",
+  UserLogin.queryDB(req.session.user, "select id, parent, topic,keywords from doc_topics order by parent,topic",
     function (err, rows, fields) {
+      res.setHeader( 'Content-Type','application/json' );
+      res.setHeader( 'charset','utf-8' );
       res.send({ err: err, rows: rows, fields: fields })
     });
 });
