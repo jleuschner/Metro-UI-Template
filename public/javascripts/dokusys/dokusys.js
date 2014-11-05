@@ -5,6 +5,7 @@ $(document).ready(function () {
     $('#doc_inhalt').height($(window).height() - $('#doc_inhalt').position().top - 30)
   })
 
+  // ---------------- links -----------------------
   $('#doc_search').change(function () {
     doc_search( $('#doc_search').val() )
   })
@@ -66,11 +67,10 @@ $(document).ready(function () {
     })
     $("#doc_inhalt ul").replaceWith(tree)
     $("#doc_inhalt a").on('click', function (e) {
-      $('#doc_topic').text($(this).text())
-      $('#doc_id').text($(this).parent().data("json").id)
+      doc_getTopic($(this).parent().data("json").id,$(this).text())
     })
     $("#doc_inhalt a").on('dblclick', function (e) {
-      $('#doc_topic').text($(this).text())
+      doc_getTopic($(this).parent().data("json").id,$(this).text())
       var $this = $(this), node = $this.parent("li");
       node.toggleClass('collapsed')
       if (node.hasClass('collapsed')) {
@@ -83,6 +83,46 @@ $(document).ready(function () {
     })
     $.Metro.initAll()
   })
+
+  // ---------------- rechts -----------------------
+
+  function doc_getTopic(t_id,t_topic) {
+    // t_topic optional zur Anzeigebeschleunigung
+    $('#doc_topic').text(t_topic)
+    $('#doc_id').text(t_id)
+    
+    var crumbs = $("<ul></ul>")
+    var cid=t_id
+    do {
+      $("<li"+( cid==t_id ? " class=active" : "") + "><a href='#' data-id="+cid+">"+$("#topic"+cid).data("json").topic+"</a></li>").prependTo(crumbs)
+      cid=$("#topic"+cid).data("json").parent
+    } while (cid != 0 )
+    $("#doc_crumbs ul").replaceWith(crumbs)
+    $('#doc_crumbs a').click( function() {
+      doc_selTopic( $(this).data("id"), $(this).text() )
+    })
+    $.getJSON("/DokuSys/getTopic", { id: t_id },function (data) {
+      if (data.err) {
+        alert(data.err)
+        $(location).attr("href", "/login")
+        return
+      }
+      $('#doc_topictext').html(data.rows[0].topictext)
+    })
+    //$.Metro.initAll()
+  }
+
+
+  // ---------------- Overall -----------------------
+
+  function doc_selTopic(t_id,t_topic) {
+    // Aufruf aus Crumbs 
+    // t_topic optional zur Anzeigebeschleunigung
+    doc_openTopic("#topic"+t_id)
+    $("#doc_inhalt a.active").removeClass("active")
+    $("#doc_inhalt #topic"+t_id+" a:first").addClass("active")
+    doc_getTopic(t_id,t_topic)
+  }
 
   $(window).resize()
 })

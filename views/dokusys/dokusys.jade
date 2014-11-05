@@ -7,27 +7,20 @@ p Die allwissende Müllhalde
       button.btn-clear.fg-steel(tabindex="-1")
     div(style='width:100%')
       .toolbar.place-right(style='margin-bottom:0px')
-        button#doc_btnTest.mini Open Node
         button#doc_btnOpenAll.mini Alle öffnen
         button#doc_btnCloseAll.mini Alle schließen
     div(style='clear:all')
     #doc_inhalt(style="width:100%;height:400px;overflow:auto")
       ul.treeview(data-role="treeview")
   .span6.bg-white
-    nav.breadcrumbs.mini
+    nav#doc_crumbs.breadcrumbs.mini
       ul
         li
           a(href="#")
             i.icon-home
-        li
-          a(href="#") Home
-        li
-          a(href="#") Library
-        li.active
-          a(href="#") Data
     h2#doc_topic Topic
     p#doc_id ID:
-    #doctext(style="width:100%") Hallo!
+    #doc_topictext(style="width:100%;border:1px solid #d9d9d9") Hallo!
     .row
       .span3
         label Login
